@@ -16,6 +16,8 @@ body {
   overflow-x: hidden;
 }
 body.is-loading { overflow: hidden; }
+/* Clip sideways overflow at the page level too; phones (iOS Safari) ignore it on body alone and zoom the page out. */
+@supports (overflow: clip) { html, body { overflow-x: clip; } }
 
 [hidden] { display: none !important; }
 img, video, svg { display: block; max-width: 100%; }

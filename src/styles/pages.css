@@ -52,8 +52,11 @@
 .stat__num { font-family: var(--font-display); font-size: clamp(2.8rem, 5vw, 4.6rem); color: var(--gold); line-height: 1; }
 .stat__label { font-size: .72rem; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); }
 @media (max-width: 800px) {
-  .stats__grid { grid-template-columns: 1fr 1fr; }
+  .stats__grid { grid-template-columns: 1fr 1fr; gap: 1.6rem 0; }
   .stat:nth-child(3) { border-left: 0; }
+  .stat { padding: .6rem .4rem; }
+  .stat__num { font-size: clamp(1.9rem, 9vw, 2.8rem); }
+  .stat__label { font-size: .62rem; letter-spacing: .16em; }
 }
 
 /* ---------- Home: horizontal services ---------- */
@@ -149,6 +152,7 @@
 
 /* ---------- Gallery ---------- */
 .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: clamp(200px, 22vw, 320px); grid-auto-flow: dense; gap: 1rem; }
+@media (max-width: 900px) { .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: clamp(150px, 44vw, 300px); gap: .6rem; } }
 .g-item { position: relative; overflow: hidden; background: var(--onyx-3); border: 0; padding: 0; text-align: left; }
 .g-item--tall { grid-row: span 2; }
 .g-item--wide { grid-column: span 2; }
@@ -229,6 +233,8 @@
 .step__sub { margin-bottom: 2.6rem; }
 .event-types { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
 .event-type { position: relative; display: block; }
+/* The cards are <label>s inside .field, so undo the small uppercase form label style. */
+.field .event-type { text-transform: none; letter-spacing: normal; font-size: 1rem; font-weight: 400; color: var(--ivory); margin: 0; }
 .event-type input { position: absolute; opacity: 0; pointer-events: none; }
 .event-type__inner { position: relative; display: grid; align-content: end; aspect-ratio: 4 / 5; overflow: hidden; padding: 1.4rem; border: 1px solid var(--line-soft); transition: border-color .4s; }
 .event-type__inner img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; transition: transform 1s var(--ease), opacity .6s; opacity: .55; }
@@ -243,7 +249,13 @@
 .event-type input:checked + .event-type__inner .event-type__check { background: var(--gold); border-color: var(--gold); }
 .event-type input:focus-visible + .event-type__inner { outline: 1px solid var(--gold); outline-offset: 3px; }
 @media (max-width: 1000px) { .booking { grid-template-columns: minmax(0, 1fr); } .booking__aside { position: static; } }
-@media (max-width: 640px) { .event-types { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) {
+  .event-types { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; }
+  .event-type__inner { padding: 1rem .9rem; grid-template-columns: minmax(0, 1fr); }
+  .event-type__inner strong { font-size: 1.3rem; overflow-wrap: break-word; }
+  .event-type__inner small { font-size: .74rem; line-height: 1.4; overflow-wrap: break-word; }
+  .event-type__check { top: .7rem; right: .7rem; width: 24px; height: 24px; }
+}
 .step__actions { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; flex-wrap: wrap; }
 .confirm { text-align: center; padding: 3rem 0; justify-items: center; gap: 1rem; outline: none; }
 .confirm.is-active { display: grid; }
