@@ -1,10 +1,23 @@
 /* ---------- Home: hero ---------- */
 .hero { position: relative; min-height: 100svh; display: grid; grid-template-rows: 1fr auto; overflow: hidden; isolation: isolate; }
 .hero__media { position: absolute; inset: 0; z-index: -1; }
+/* Sits above the video so the menu, heading and text stay readable on any frame. */
 .hero__media::after {
-  content: ''; position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 70% 30%, transparent 20%, rgba(11, 11, 12, .65) 75%), linear-gradient(180deg, rgba(11, 11, 12, .2) 40%, var(--onyx));
+  content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(11, 11, 12, .75) 0, rgba(11, 11, 12, 0) 22%),
+    linear-gradient(90deg, rgba(11, 11, 12, .82) 0, rgba(11, 11, 12, .55) 38%, rgba(11, 11, 12, .1) 70%),
+    linear-gradient(180deg, rgba(11, 11, 12, 0) 45%, rgba(11, 11, 12, .55) 75%, var(--onyx) 100%),
+    rgba(11, 11, 12, .18);
 }
+@media (max-width: 700px) {
+  .hero__media::after {
+    background:
+      linear-gradient(180deg, rgba(11, 11, 12, .78) 0, rgba(11, 11, 12, .25) 20%, rgba(11, 11, 12, .45) 45%, rgba(11, 11, 12, .82) 75%, var(--onyx) 100%),
+      rgba(11, 11, 12, .2);
+  }
+}
+.hero__content, .hero__meta { text-shadow: 0 2px 18px rgba(0, 0, 0, .55); }
 .hero__video, .hero__slides, .hero__slides img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .hero__video { z-index: 1; opacity: 0; transition: opacity 1.2s; }
 .hero__video.is-ready { opacity: 1; }
