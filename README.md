@@ -129,11 +129,13 @@ In https://github.com/mealand/gadar-site go to **Settings > Secrets and variable
 
 FTP data connections from GitHub to shared hosting can time out ("Timeout when trying to open data connection"). SSH avoids this and is faster. Namecheap shared hosting accepts SSH on port 21098. When the SSH secrets below exist, the workflow uses SSH and ignores the FTP secrets.
 
-1. On your computer, create a key with no passphrase (PowerShell or Terminal):
+1. On your computer, create a key and press Enter twice when asked for a passphrase (leave it empty). In Windows PowerShell:
 
-   ```bash
-   ssh-keygen -t ed25519 -C "github-deploy" -N "" -f gadar_deploy
+   ```powershell
+   & "C:\Windows\System32\OpenSSH\ssh-keygen.exe" -t ed25519 -C "github-deploy" -f gadar_deploy
    ```
+
+   On Mac or Linux the command is simply `ssh-keygen -t ed25519 -C "github-deploy" -f gadar_deploy`.
 
    This creates two files: `gadar_deploy` (private, keep it secret) and `gadar_deploy.pub` (public).
 2. cPanel > **SSH Access** > **Manage SSH Keys** > **Import Key**. Name it `gadar_deploy`, paste the contents of `gadar_deploy.pub` into the public key box, and click **Import**. Back on the list, click **Manage** next to it and **Authorize**.
@@ -142,7 +144,7 @@ FTP data connections from GitHub to shared hosting can time out ("Timeout when t
 
    | Name | Value |
    | --- | --- |
-   | `SSH_HOST` | your server name from cPanel's sidebar (for example `server123.web-hosting.com`), or `gadarevents.com` |
+   | `SSH_HOST` | `ftp.gadarevents.com`, or the server name from cPanel's sidebar (for example `server123.web-hosting.com`). Not the bare `gadarevents.com`, which does not answer SSH. |
    | `SSH_USERNAME` | your cPanel username |
    | `SSH_PRIVATE_KEY` | the entire contents of the `gadar_deploy` file, including the BEGIN and END lines |
    | `SSH_PORT` | optional, defaults to `21098` |

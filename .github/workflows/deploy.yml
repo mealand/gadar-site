@@ -43,9 +43,17 @@ jobs:
           SSH_PORT: ${{ secrets.SSH_PORT || '21098' }}
         run: |
           install -m 700 -d ~/.ssh
-          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          # Keys copied on Windows can carry CRLF line endings, which ssh rejects.
+          printf '%s\n' "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -p "$SSH_PORT" "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+          if ! ssh-keygen -y -f ~/.ssh/deploy_key > /dev/null; then
+            echo "::error::SSH_PRIVATE_KEY is not a valid private key. Paste the whole gadar_deploy file, including the BEGIN and END lines."
+            exit 1
+          fi
+          if ! ssh-keyscan -T 15 -p "$SSH_PORT" "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null || ! [ -s ~/.ssh/known_hosts ]; then
+            echo "::error::No SSH server answered at $SSH_HOST port $SSH_PORT. On Namecheap use ftp.gadarevents.com or the server name from cPanel (for example server123.web-hosting.com), not the bare domain."
+            exit 1
+          fi
           # Only adds and updates files, so the server config and visitor uploads are never touched.
           rsync -rltz --omit-dir-times --stats \
             --exclude 'api/lib/config.php' --exclude 'uploads/experiences/' \

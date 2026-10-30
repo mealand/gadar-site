@@ -11,3 +11,9 @@ database/*.sqlite
 # Visitor uploads live only on the server
 public/uploads/*
 !public/uploads/.htaccess
+
+# Never commit SSH keys
+gadar_deploy
+gadar_deploy.pub
+*.pem
+id_*
