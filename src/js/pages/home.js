@@ -24,16 +24,18 @@ export function heroIntro() {
   });
 }
 
-// Uses the real showreel if one has been uploaded, otherwise a slow crossfading slideshow.
+// Plays the showreel that suits the screen shape, otherwise a slow crossfading slideshow.
 export async function heroMedia() {
   const video = document.querySelector('.hero__video');
   const slides = gsap.utils.toArray('.hero__slides img');
-  if (video?.dataset.src) {
+  const portrait = matchMedia('(max-aspect-ratio: 4/5)').matches && video?.dataset.srcPortrait;
+  const src = portrait || video?.dataset.src;
+  if (src) {
     try {
-      const res = await fetch(video.dataset.src, { method: 'HEAD' });
+      const res = await fetch(src, { method: 'HEAD' });
       const type = res.headers.get('content-type') || '';
       if (res.ok && type.startsWith('video')) {
-        video.src = video.dataset.src;
+        video.src = src;
         video.addEventListener('canplay', () => video.classList.add('is-ready'), { once: true });
         if (!reducedMotion) video.play().catch(() => {});
         return;

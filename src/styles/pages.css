@@ -251,3 +251,26 @@
 /* ---------- 404 ---------- */
 .notfound { min-height: 100svh; display: grid; place-items: center; text-align: center; padding: 8rem var(--gutter) 4rem; }
 .notfound h1 { font-size: clamp(6rem, 22vw, 18rem); color: transparent; -webkit-text-stroke: 1px var(--gold); line-height: 1; }
+
+/* ---------- Gallery video tiles ---------- */
+.g-item__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .8s, transform 1.2s var(--ease); }
+.g-item__video.is-playing { opacity: 1; }
+.g-item:hover .g-item__video { transform: scale(1.07); }
+.g-item__video.is-playing ~ .g-item__play { width: 44px; height: 44px; inset: 1rem 1rem auto auto; font-size: .7rem; background: rgba(11, 11, 12, .45); }
+
+/* ---------- Partners ---------- */
+.partners { border-top: 1px solid var(--line-soft); }
+.partners__head { max-width: 46rem; margin-bottom: 3.5rem; }
+.partners__lead { color: var(--ivory-dim); margin-top: 1.4rem; }
+.partners__group { font-family: var(--font-body); font-size: .74rem; letter-spacing: .28em; text-transform: uppercase; color: var(--gold); margin: 3rem 0 1.2rem; }
+.partners__grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line-soft); border-left: 1px solid var(--line-soft); }
+.partner { position: relative; border-right: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); overflow: hidden; }
+.partner__in { display: flex; flex-direction: column; justify-content: center; gap: .6rem; height: 100%; min-height: 9.5rem; padding: 1.8rem 1.6rem; text-align: center; }
+.partner strong { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.25rem, 1.8vw, 1.6rem); line-height: 1.15; color: var(--ivory); transition: color .5s; }
+.partner span { font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; color: var(--ivory-dim); }
+.partner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 120%, rgba(201, 164, 92, .18), transparent 70%); opacity: 0; transition: opacity .6s; pointer-events: none; }
+.partner:hover::before { opacity: 1; }
+.partner:hover strong { color: var(--gold); }
+.partners__cta { margin-top: 3rem; color: var(--ivory-dim); display: flex; flex-wrap: wrap; gap: 1rem 1.6rem; align-items: center; }
+@media (max-width: 900px) { .partners__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .partner__in { min-height: 7.5rem; padding: 1.4rem 1rem; } }

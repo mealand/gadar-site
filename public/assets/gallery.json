@@ -1,219 +1,336 @@
 [
   {
-    "type": "image",
-    "src": "/assets/placeholders/wedding-01.svg",
+    "type": "video",
+    "src": "/assets/video/first-dance-sparklers.mp4",
+    "poster": "/assets/images/poster-first-dance-sparklers.jpg",
     "category": "wedding",
-    "caption": "Placeholder: Wedding",
-    "size": ""
+    "caption": "First dance under sparklers, Godswill and Lois",
+    "size": "tall"
   },
   {
     "type": "image",
-    "src": "/assets/placeholders/government-01.svg",
-    "category": "government",
-    "caption": "Placeholder: Government Function",
-    "size": ""
-  },
-  {
-    "type": "image",
-    "src": "/assets/placeholders/entertainment-01.svg",
-    "category": "entertainment",
-    "caption": "Placeholder: Entertainment Show",
-    "size": ""
-  },
-  {
-    "type": "image",
-    "src": "/assets/placeholders/catering-01.svg",
-    "category": "catering",
-    "caption": "Placeholder: Catering",
-    "size": ""
-  },
-  {
-    "type": "image",
-    "src": "/assets/placeholders/ushering-01.svg",
-    "category": "ushering",
-    "caption": "Placeholder: Gadar Ushering",
-    "size": ""
-  },
-  {
-    "type": "image",
-    "src": "/assets/placeholders/decor-01.svg",
-    "category": "decor",
-    "caption": "Placeholder: Decor and Design",
-    "size": ""
-  },
-  {
-    "type": "image",
-    "src": "/assets/placeholders/wedding-02.svg",
+    "src": "/assets/images/wedding-couple-portrait.jpg",
     "category": "wedding",
-    "caption": "Placeholder: Wedding",
+    "caption": "Fehintolu and Oluwaseun, the reception",
     "size": "wide"
   },
   {
     "type": "image",
-    "src": "/assets/placeholders/government-02.svg",
-    "category": "government",
-    "caption": "Placeholder: Government Function",
-    "size": ""
-  },
-  {
-    "type": "image",
-    "src": "/assets/placeholders/entertainment-02.svg",
-    "category": "entertainment",
-    "caption": "Placeholder: Entertainment Show",
-    "size": ""
-  },
-  {
-    "type": "image",
-    "src": "/assets/placeholders/catering-02.svg",
-    "category": "catering",
-    "caption": "Placeholder: Catering",
-    "size": ""
-  },
-  {
-    "type": "image",
-    "src": "/assets/placeholders/ushering-02.svg",
-    "category": "ushering",
-    "caption": "Placeholder: Gadar Ushering",
-    "size": ""
-  },
-  {
-    "type": "image",
-    "src": "/assets/placeholders/decor-02.svg",
+    "src": "/assets/images/decor-crystal-centrepiece.jpg",
     "category": "decor",
-    "caption": "Placeholder: Decor and Design",
-    "size": ""
-  },
-  {
-    "type": "image",
-    "src": "/assets/placeholders/wedding-03.svg",
-    "category": "wedding",
-    "caption": "Placeholder: Wedding",
+    "caption": "Crystal and gold centrepieces",
     "size": "tall"
   },
   {
-    "type": "image",
-    "src": "/assets/placeholders/government-03.svg",
-    "category": "government",
-    "caption": "Placeholder: Government Function",
-    "size": "tall"
-  },
-  {
-    "type": "image",
-    "src": "/assets/placeholders/entertainment-03.svg",
-    "category": "entertainment",
-    "caption": "Placeholder: Entertainment Show",
-    "size": "tall"
-  },
-  {
-    "type": "image",
-    "src": "/assets/placeholders/catering-03.svg",
-    "category": "catering",
-    "caption": "Placeholder: Catering",
-    "size": "tall"
-  },
-  {
-    "type": "image",
-    "src": "/assets/placeholders/ushering-03.svg",
+    "type": "video",
+    "src": "/assets/video/dignitary-arrival.mp4",
+    "poster": "/assets/images/poster-dignitary-arrival.jpg",
     "category": "ushering",
-    "caption": "Placeholder: Gadar Ushering",
+    "caption": "Dignitaries arrive, Kaduna International Housing Exhibition",
     "size": "tall"
   },
   {
     "type": "image",
-    "src": "/assets/placeholders/decor-03.svg",
-    "category": "decor",
-    "caption": "Placeholder: Decor and Design",
-    "size": "tall"
-  },
-  {
-    "type": "image",
-    "src": "/assets/placeholders/wedding-04.svg",
-    "category": "wedding",
-    "caption": "Placeholder: Wedding",
-    "size": ""
-  },
-  {
-    "type": "image",
-    "src": "/assets/placeholders/government-04.svg",
+    "src": "/assets/images/hosting-gala-hall.jpg",
     "category": "government",
-    "caption": "Placeholder: Government Function",
+    "caption": "Gala dinner in honour of the Gates Foundation global leadership delegation",
     "size": ""
   },
   {
     "type": "image",
-    "src": "/assets/placeholders/entertainment-04.svg",
+    "src": "/assets/images/bride-portrait-sage.jpg",
+    "category": "wedding",
+    "caption": "A bride in sage and silver",
+    "size": "tall"
+  },
+  {
+    "type": "video",
+    "src": "/assets/video/decor-reveal.mp4",
+    "poster": "/assets/images/poster-decor-reveal.jpg",
+    "category": "decor",
+    "caption": "The reveal: hall, lights and florals",
+    "size": "tall"
+  },
+  {
+    "type": "image",
+    "src": "/assets/images/government-dignitaries-hall.jpg",
+    "category": "government",
+    "caption": "Northwest sensitisation flag off with the Deputy Governor of Kaduna State",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/images/catering-spread.jpg",
+    "category": "catering",
+    "caption": "Meals packed and ready for service",
+    "size": ""
+  },
+  {
+    "type": "video",
+    "src": "/assets/video/graduation-ceremony.mp4",
+    "poster": "/assets/images/poster-graduation-ceremony.jpg",
+    "category": "government",
+    "caption": "Maiden graduation of 4,050 youths, Kaduna State",
+    "size": "tall"
+  },
+  {
+    "type": "image",
+    "src": "/assets/images/hero-celebrants.jpg",
     "category": "entertainment",
-    "caption": "Placeholder: Entertainment Show",
+    "caption": "Mama Lydia at 80, the celebrants",
     "size": "wide"
   },
   {
     "type": "image",
-    "src": "/assets/placeholders/catering-04.svg",
-    "category": "catering",
-    "caption": "Placeholder: Catering",
+    "src": "/assets/images/bridal-party.jpg",
+    "category": "wedding",
+    "caption": "Sisters for life",
     "size": ""
   },
   {
-    "type": "image",
-    "src": "/assets/placeholders/ushering-04.svg",
-    "category": "ushering",
-    "caption": "Placeholder: Gadar Ushering",
-    "size": ""
+    "type": "video",
+    "src": "/assets/video/sisters-for-life.mp4",
+    "poster": "/assets/images/poster-sisters-for-life.jpg",
+    "category": "wedding",
+    "caption": "The bride and her sisters",
+    "size": "tall"
   },
   {
     "type": "image",
-    "src": "/assets/placeholders/decor-04.svg",
+    "src": "/assets/images/decor-tablescape-green.jpg",
     "category": "decor",
-    "caption": "Placeholder: Decor and Design",
-    "size": ""
+    "caption": "Emerald and gold tablescape",
+    "size": "tall"
   },
   {
     "type": "image",
-    "src": "/assets/placeholders/wedding-05.svg",
+    "src": "/assets/images/ushering-red-carpet.jpg",
+    "category": "ushering",
+    "caption": "Red carpet protocol",
+    "size": ""
+  },
+  {
+    "type": "video",
+    "src": "/assets/video/townhall-hospitality.mp4",
+    "poster": "/assets/images/poster-townhall-hospitality.jpg",
+    "category": "catering",
+    "caption": "Hospitality at the ProvidusUnity Bank town hall",
+    "size": "tall"
+  },
+  {
+    "type": "image",
+    "src": "/assets/images/wedding-cake.jpg",
     "category": "wedding",
-    "caption": "Placeholder: Wedding",
+    "caption": "Four tiers in ivory",
     "size": ""
   },
   {
     "type": "image",
-    "src": "/assets/placeholders/government-05.svg",
+    "src": "/assets/images/stage-lighting-rig.jpg",
+    "category": "entertainment",
+    "caption": "Stage lighting, ready for the night",
+    "size": ""
+  },
+  {
+    "type": "video",
+    "src": "/assets/video/cloud-dance.mp4",
+    "poster": "/assets/images/poster-cloud-dance.jpg",
+    "category": "wedding",
+    "caption": "Dancing on a cloud",
+    "size": "tall"
+  },
+  {
+    "type": "image",
+    "src": "/assets/images/hero-groomsmen.jpg",
+    "category": "wedding",
+    "caption": "The groom and his men",
+    "size": "wide"
+  },
+  {
+    "type": "image",
+    "src": "/assets/images/decor-moroccan-stage.jpg",
+    "category": "decor",
+    "caption": "A Moroccan inspired stage in gold",
+    "size": ""
+  },
+  {
+    "type": "video",
+    "src": "/assets/video/bridal-entrance.mp4",
+    "poster": "/assets/images/poster-bridal-entrance.jpg",
+    "category": "wedding",
+    "caption": "The entrance of Habiba and her siblings",
+    "size": "tall"
+  },
+  {
+    "type": "image",
+    "src": "/assets/images/exhibition-pottery.jpg",
     "category": "government",
-    "caption": "Placeholder: Government Function",
+    "caption": "Kaduna crafts showcased for visiting delegates",
     "size": ""
   },
   {
     "type": "image",
-    "src": "/assets/placeholders/entertainment-05.svg",
+    "src": "/assets/images/place-setting-gold.jpg",
+    "category": "catering",
+    "caption": "Gold chargers and printed menus",
+    "size": ""
+  },
+  {
+    "type": "video",
+    "src": "/assets/video/stage-lighting.mp4",
+    "poster": "/assets/images/poster-stage-lighting.jpg",
     "category": "entertainment",
-    "caption": "Placeholder: Entertainment Show",
-    "size": ""
-  },
-  {
-    "type": "image",
-    "src": "/assets/placeholders/wedding-06.svg",
-    "category": "wedding",
-    "caption": "Placeholder: Wedding",
+    "caption": "Lights, colour and atmosphere",
     "size": "tall"
   },
   {
     "type": "image",
-    "src": "/assets/placeholders/entertainment-06.svg",
+    "src": "/assets/images/birthday-cake-80.jpg",
     "category": "entertainment",
-    "caption": "Placeholder: Entertainment Show",
+    "caption": "An 80th birthday cake",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/images/protocol-greeting.jpg",
+    "category": "ushering",
+    "caption": "Welcoming dignitaries",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/images/decor-ceiling-installation.jpg",
+    "category": "decor",
+    "caption": "A ceiling of light and florals",
+    "size": "tall"
+  },
+  {
+    "type": "video",
+    "src": "/assets/video/praise-party.mp4",
+    "poster": "/assets/images/poster-praise-party.jpg",
+    "category": "entertainment",
+    "caption": "Praise party for Mama Lydia at 80",
     "size": "tall"
   },
   {
     "type": "image",
-    "src": "/assets/placeholders/wedding-07.svg",
-    "category": "wedding",
-    "caption": "Placeholder: Wedding",
+    "src": "/assets/images/celebration-dance-floor.jpg",
+    "category": "entertainment",
+    "caption": "On the dance floor at #80InFullBloom",
+    "size": "wide"
+  },
+  {
+    "type": "image",
+    "src": "/assets/images/graduation-podium.jpg",
+    "category": "government",
+    "caption": "Addressing the graduating class",
     "size": ""
   },
   {
     "type": "image",
-    "src": "/assets/placeholders/wedding-08.svg",
+    "src": "/assets/images/reception-welcome-signage.jpg",
     "category": "wedding",
-    "caption": "Placeholder: Wedding",
+    "caption": "Welcome to the wedding of Ahmad and Amina",
     "size": ""
+  },
+  {
+    "type": "video",
+    "src": "/assets/video/pottery-exhibition.mp4",
+    "poster": "/assets/images/poster-pottery-exhibition.jpg",
+    "category": "government",
+    "caption": "A potter at work, cultural exhibition",
+    "size": "tall"
+  },
+  {
+    "type": "image",
+    "src": "/assets/images/decor-crystal-table.jpg",
+    "category": "decor",
+    "caption": "Crystal towers and lime accents",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/images/table-setting-orange.jpg",
+    "category": "catering",
+    "caption": "Reception tables in sunset tones",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/images/dignitary-arrival.jpg",
+    "category": "ushering",
+    "caption": "Arrival of dignitaries",
+    "size": ""
+  },
+  {
+    "type": "video",
+    "src": "/assets/video/wedding-film.mp4",
+    "poster": "/assets/images/poster-wedding-film.jpg",
+    "category": "wedding",
+    "caption": "Fehintolu and Oluwaseun, the film",
+    "size": "wide"
+  },
+  {
+    "type": "image",
+    "src": "/assets/images/nikkah-bride-entrance.jpg",
+    "category": "wedding",
+    "caption": "Nikkah: a bride escorted in",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/images/praise-party-choir.jpg",
+    "category": "entertainment",
+    "caption": "Praise party choir",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/images/gala-backdrop.jpg",
+    "category": "government",
+    "caption": "Gala dinner welcome wall",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/images/graduation-welcome-arch.jpg",
+    "category": "ushering",
+    "caption": "Welcome arch for the graduation ceremony",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/images/gift-bags.jpg",
+    "category": "catering",
+    "caption": "Gift bags for every guest",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/images/wedding-reception-hall.jpg",
+    "category": "decor",
+    "caption": "A reception hall in ivory and green",
+    "size": "wide"
+  },
+  {
+    "type": "image",
+    "src": "/assets/images/mc-on-stage.jpg",
+    "category": "entertainment",
+    "caption": "The MC warms up the room",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/images/exhibition-crafts.jpg",
+    "category": "government",
+    "caption": "Woven textiles on display",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/images/bride-train-sage.jpg",
+    "category": "wedding",
+    "caption": "The train, the veil, the moment",
+    "size": "tall"
   }
 ]

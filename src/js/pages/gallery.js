@@ -18,7 +18,7 @@ export async function initGallery() {
     <button class="g-item ${item.size ? 'g-item--' + item.size : ''}" data-category="${item.category}" data-index="${i}"
       data-cursor="${item.type === 'video' ? 'Play' : 'View'}" aria-label="Open ${item.caption}">
       <img src="${item.poster || item.src}" alt="${item.caption}" loading="lazy" />
-      ${item.type === 'video' ? playIcon : ''}
+      ${item.type === 'video' ? `<video class="g-item__video" data-src="${item.src}" muted loop playsinline preload="none" aria-hidden="true"></video>${playIcon}` : ''}
       <span class="g-item__label">${item.caption}</span>
     </button>`).join('');
 
@@ -31,6 +31,19 @@ export async function initGallery() {
       once: true,
       onEnter: (batch) => gsap.to(batch, { autoAlpha: 1, y: 0, stagger: 0.08, duration: 1.2 }),
     });
+  }
+
+  // Video tiles play silently while they are on screen.
+  if (!reducedMotion && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => entries.forEach(({ target, isIntersecting }) => {
+      if (isIntersecting) {
+        if (!target.src) target.src = target.dataset.src;
+        target.play().then(() => target.classList.add('is-playing')).catch(() => {});
+      } else {
+        target.pause();
+      }
+    }), { rootMargin: '100px' });
+    grid.querySelectorAll('.g-item__video').forEach((v) => io.observe(v));
   }
 
   const visible = () => cards.filter((c) => !c.classList.contains('is-hidden'));

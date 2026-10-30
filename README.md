@@ -31,15 +31,30 @@ scripts/            Dash checker and placeholder image generator
 - "Have a Gadar Experience" is the main call to action (hero, booking, footer).
 - "Experience Gadar" invites people to explore (services, gallery, stories).
 
+## Photos and video
+
+All photos and videos come from Gadar Events footage. Every video is muted and compressed for the web (H.264, no audio track, fast start).
+
+| What | Where |
+| --- | --- |
+| Hero showreel | `public/assets/video/hero.mp4` (1280x720) for wide screens and `hero-portrait.mp4` (720x1280) for phones. The home page picks the right one by screen shape. Keep each under about 8 MB. |
+| Page images | `public/assets/images/`, stills taken from the videos. |
+| Gallery | Files listed in `public/assets/gallery.json`. Each entry: `{ "type": "image", "src": "/assets/images/name.jpg", "category": "wedding", "caption": "...", "size": "tall" }`. Categories: wedding, government, entertainment, catering, ushering, decor. `size` can be `tall`, `wide` or empty. For a video use `"type": "video"`, a `src` in `/assets/video/` and a `"poster"` image. Video tiles play silently while on screen. |
+| Partners | `src/partials/partners.html`, shown on the home and about pages. Names are set as wordmarks; swap in a logo image when partners supply one. |
+
+To cut a new muted clip with ffmpeg:
+
+```bash
+ffmpeg -ss 12 -t 8 -i source.mp4 -vf "scale=540:960:force_original_aspect_ratio=increase,crop=540:960" -c:v libx264 -crf 27 -preset slow -pix_fmt yuv420p -an -movflags +faststart public/assets/video/new-clip.mp4
+```
+
 ## Replacing placeholders
 
 Everything marked *Placeholder* is waiting for real content.
 
 | What | Where |
 | --- | --- |
-| Hero showreel | Save as `public/assets/video/hero.mp4` (muted, about 15 to 30 seconds, under 15 MB). It plays automatically once present. |
-| Gallery photos and videos | Put files in `public/assets/gallery/` and list them in `public/assets/gallery.json`. Each entry: `{ "type": "image", "src": "/assets/gallery/name.jpg", "category": "wedding", "caption": "...", "size": "tall" }`. Categories: wedding, government, entertainment, catering, ushering, decor. `size` can be `tall`, `wide` or empty. For video add `"type": "video"` and a `"poster"` image. |
-| Page images | Search the HTML files for `/assets/placeholders/` and swap in real photos (ideally 1600 to 2000 px wide JPG or WEBP). |
+| Team portraits | `about.html`, the four `team-0x.svg` cards |
 | Logo | Header monogram in `src/partials/header.html`, `public/favicon.svg`, `public/assets/og-image.jpg` |
 | Phone, WhatsApp, email | `src/partials/footer.html`, `contact.html`, `book.html` (search for `2348000000000`), `src/js/api.js`, and `whatsapp` in the server config |
 | Statistics | `index.html`, search for `data-count` |

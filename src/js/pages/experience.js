@@ -11,10 +11,10 @@ const esc = (s = '') => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<
 
 // Shown until real, approved stories exist.
 const samples = [
-  { name: 'Sample Client', role: 'client', event_name: 'Wedding reception, Kaduna', story: 'Placeholder story. From our first meeting to the last dance, every single detail felt considered. Our families still talk about the entrance.', media: [{ type: 'image', url: '/assets/placeholders/wedding-08.svg' }] },
+  { name: 'Sample Client', role: 'client', event_name: 'Wedding reception, Kaduna', story: 'Placeholder story. From our first meeting to the last dance, every single detail felt considered. Our families still talk about the entrance.', media: [{ type: 'image', url: '/assets/images/bridal-party.jpg' }] },
   { name: 'Sample Guest', role: 'attendee', event_name: 'Awards night, Abuja', story: 'Placeholder story. The ushers greeted every guest by name and the evening ran perfectly on time.', media: [] },
-  { name: 'Sample Client', role: 'client', event_name: 'Corporate gala, Kaduna', story: 'Placeholder story. Calm, professional and beautifully presented. Our partners left impressed.', media: [{ type: 'image', url: '/assets/placeholders/government-05.svg' }, { type: 'image', url: '/assets/placeholders/catering-04.svg' }] },
-  { name: 'Sample Guest', role: 'attendee', event_name: 'Concert, Lagos', story: 'Placeholder story. Thousands of people and yet it felt intimate. The VIP hospitality was outstanding.', media: [{ type: 'image', url: '/assets/placeholders/entertainment-06.svg' }] },
+  { name: 'Sample Client', role: 'client', event_name: 'Corporate gala, Kaduna', story: 'Placeholder story. Calm, professional and beautifully presented. Our partners left impressed.', media: [{ type: 'image', url: '/assets/images/gala-backdrop.jpg' }, { type: 'image', url: '/assets/images/place-setting-gold.jpg' }] },
+  { name: 'Sample Guest', role: 'attendee', event_name: 'Concert, Lagos', story: 'Placeholder story. Thousands of people and yet it felt intimate. The VIP hospitality was outstanding.', media: [{ type: 'image', url: '/assets/images/celebration-dancers.jpg' }] },
 ];
 
 function cardHTML(item, placeholder = false) {

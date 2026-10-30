@@ -37,7 +37,7 @@ function render() {
   let el;
   if (item.type === 'video') {
     el = document.createElement('video');
-    Object.assign(el, { src: item.src, controls: true, autoplay: true, playsInline: true });
+    Object.assign(el, { src: item.src, poster: item.poster || '', controls: true, autoplay: true, muted: true, loop: true, playsInline: true });
   } else {
     el = document.createElement('img');
     Object.assign(el, { src: item.src, alt: item.caption || '' });
