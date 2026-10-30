@@ -16,7 +16,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      # SSH is used when its key is set (recommended on Namecheap); otherwise FTPS.
+      # SFTP is used when its key is set (recommended on Namecheap); FTPS otherwise or if SFTP fails.
       USE_SSH: ${{ secrets.SSH_PRIVATE_KEY != '' }}
     steps:
       - name: Check out code
@@ -34,8 +34,10 @@ jobs:
       - name: Build site (includes the dash check)
         run: npm run build
 
-      - name: Upload to Namecheap over SSH
+      - name: Upload to Namecheap over SFTP
+        id: sftp
         if: env.USE_SSH == 'true'
+        continue-on-error: true
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
@@ -79,42 +81,50 @@ jobs:
             echo "::error::No SSH server answered at $SSH_HOST port $SSH_PORT. On Namecheap use ftp.gadarevents.com or the server name from cPanel (for example server123.web-hosting.com), not the bare domain."
             exit 1
           fi
-          ssh_cmd="ssh -i $HOME/.ssh/deploy_key -p $SSH_PORT -o BatchMode=yes -o ConnectTimeout=30"
-          if ! $ssh_cmd "$SSH_USERNAME@$SSH_HOST" 'echo connected; command -v rsync tar' ; then
-            echo "::error::Could not sign in over SSH as $SSH_USERNAME. Check SSH_USERNAME is your cPanel username and that the key is Authorized in cPanel > SSH Access > Manage SSH Keys."
+          # The host allows file transfer (SFTP) but no shell, so everything below uses SFTP only.
+          sftp_run() { sftp -i ~/.ssh/deploy_key -P "$SSH_PORT" -o BatchMode=yes -o ConnectTimeout=30 -b "$1" "$SSH_USERNAME@$SSH_HOST"; }
+          printf 'ls -1\n' > /tmp/probe.sftp
+          if ! home=$(sftp_run /tmp/probe.sftp 2>&1); then
+            echo "::error::SFTP sign in failed: $(printf '%s' "$home" | tail -n 2 | tr '\n' ' '). Check SSH_USERNAME is your cPanel username and that the key is Authorized in cPanel > SSH Access > Manage SSH Keys."
             exit 1
           fi
-          # Upload into the folder the domain is actually served from (addon domains are not public_html).
+          home=$(printf '%s\n' "$home" | grep -v '^sftp>' | tr -s ' \n' '\n' | sed '/^$/d')
+          echo "::notice::Home folder: $(printf '%s' "$home" | tr '\n' ' ')"
+
+          # Find the folder the domain is served from: the one already holding the site's 404.html.
           target="$SSH_TARGET_DIR"
           if [ -z "$target" ]; then
-            target=$($ssh_cmd "$SSH_USERNAME@$SSH_HOST" "uapi --output=json DomainInfo single_domain_data domain=$SITE_DOMAIN 2>/dev/null" \
-              | grep -o '"documentroot":"[^"]*"' | head -n1 | cut -d'"' -f4 | tr -d '\\\\')
+            candidates="public_html/$SITE_DOMAIN $SITE_DOMAIN $(printf '%s\n' "$home" | grep -i gadar | tr '\n' ' ') public_html"
+            for d in $candidates; do
+              printf 'ls %s/404.html\n' "$d" > /tmp/check.sftp
+              if sftp_run /tmp/check.sftp > /dev/null 2>&1; then target="$d"; break; fi
+            done
           fi
-          target="${target:-public_html}"
+          if [ -z "$target" ]; then
+            echo "::error::Could not find the folder $SITE_DOMAIN is served from (checked: $candidates). Set the repository variable SSH_TARGET_DIR to the Document Root shown in cPanel > Domains."
+            exit 1
+          fi
           echo "::notice::Uploading to $target"
-          # Report where copies of the site already live, to help find the folder the domain serves.
-          found=$($ssh_cmd "$SSH_USERNAME@$SSH_HOST" 'cd ~ && echo "home: $(ls -1 | tr "\n" " ")"; find ~ -maxdepth 4 -name 404.html -path "*" -not -path "*/node_modules/*" 2>/dev/null | sed "s#^$HOME/##" | tr "\n" " "; echo; uapi DomainInfo list_domains 2>&1 | grep -E "main_domain|addon|- " | head -8 | tr "\n" " "' || true)
-          echo "::notice::Server layout: $found"
-          # Only adds and updates files, so the server config and visitor uploads are never touched.
-          set +e
-          rsync -rltz --omit-dir-times --stats \
-            --exclude 'api/lib/config.php' --exclude 'uploads/experiences/' \
-            -e "$ssh_cmd" \
-            dist/ "$SSH_USERNAME@$SSH_HOST:$target/"
-          code=$?
-          set -e
-          [ $code -eq 0 ] && echo "::notice::rsync upload finished"
-          if [ $code -ne 0 ]; then
-            # Some shared hosts restrict rsync; stream the site as one archive instead.
-            echo "::notice::rsync stopped with code $code, uploading as an archive instead."
-            tar -czf - -C dist . | $ssh_cmd "$SSH_USERNAME@$SSH_HOST" "tar -xzf - -C '$target' && echo 'Archive unpacked into $target'"
-          fi
+
+          # One explicit mkdir and put per item, so nothing depends on how the server copies folders.
+          # The server config and visitor uploads are not part of the build, so they are never touched.
+          (
+            cd dist
+            find . -mindepth 1 -type d | sed 's#^\./##' | sort | while read -r d; do printf -- '-mkdir "%s/%s"\n' "$target" "$d"; done
+            find . -type f | sed 's#^\./##' | sort | while read -r f; do printf 'put "%s" "%s/%s"\n' "$f" "$target" "$f"; done
+          ) > /tmp/upload.sftp
+          files=$(grep -c '^put ' /tmp/upload.sftp)
+          (cd dist && sftp_run /tmp/upload.sftp > /tmp/upload.log 2>&1) || {
+            echo "::error::SFTP upload stopped: $(grep -v '^sftp>' /tmp/upload.log | tail -n 3 | tr '\n' ' ')"
+            exit 1
+          }
+          echo "::notice::Uploaded $files files to $target over SFTP"
 
       # FTPS data connections on shared hosting sometimes time out, so the upload is retried.
       # Each attempt resumes from what the server already has.
       - name: Upload to Namecheap over FTPS
         id: ftp1
-        if: env.USE_SSH != 'true'
+        if: env.USE_SSH != 'true' || steps.sftp.outcome == 'failure'
         continue-on-error: true
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -135,7 +145,7 @@ jobs:
 
       - name: Retry FTPS upload
         id: ftp2
-        if: env.USE_SSH != 'true' && steps.ftp1.outcome == 'failure'
+        if: (env.USE_SSH != 'true' || steps.sftp.outcome == 'failure') && steps.ftp1.outcome == 'failure'
         continue-on-error: true
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -154,7 +164,7 @@ jobs:
             uploads/experiences/**
 
       - name: Final FTPS attempt
-        if: env.USE_SSH != 'true' && steps.ftp2.outcome == 'failure'
+        if: (env.USE_SSH != 'true' || steps.sftp.outcome == 'failure') && steps.ftp2.outcome == 'failure'
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
