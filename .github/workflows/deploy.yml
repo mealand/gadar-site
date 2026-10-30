@@ -44,10 +44,25 @@ jobs:
         run: |
           install -m 700 -d ~/.ssh
           # Keys copied on Windows can carry CRLF line endings, which ssh rejects.
-          printf '%s\n' "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/deploy_key
+          key=$(printf '%s' "$SSH_PRIVATE_KEY" | tr -d '\r')
+          # A key pasted onto a single line (spaces instead of line breaks) is rebuilt.
+          if [ "$(printf '%s\n' "$key" | wc -l)" -lt 3 ] && printf '%s' "$key" | grep -q -- '-----BEGIN'; then
+            body=$(printf '%s' "$key" | sed -E 's/.*-----BEGIN [A-Z ]+-----//; s/-----END.*//' | tr -s ' ' '\n' | sed '/^$/d')
+            key=$(printf -- '-----BEGIN OPENSSH PRIVATE KEY-----\n%s\n-----END OPENSSH PRIVATE KEY-----' "$body")
+          fi
+          printf '%s\n' "$key" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          if ! ssh-keygen -y -f ~/.ssh/deploy_key > /dev/null; then
-            echo "::error::SSH_PRIVATE_KEY is not a valid private key. Paste the whole gadar_deploy file, including the BEGIN and END lines."
+          if ! err=$(ssh-keygen -y -P '' -f ~/.ssh/deploy_key 2>&1 >/dev/null); then
+            # Describe what was received without printing the key itself.
+            first=$(head -n1 ~/.ssh/deploy_key | cut -c1-36)
+            echo "Received $(wc -l < ~/.ssh/deploy_key) lines starting with: $first"
+            echo "ssh-keygen says: $err"
+            case "$first" in
+              ssh-ed25519*|ssh-rsa*) hint="This is the PUBLIC key (gadar_deploy.pub). The secret needs the private file gadar_deploy, without .pub." ;;
+              -----BEGIN*) if printf '%s' "$err" | grep -qi passphrase; then hint="The key has a passphrase. Make a new key and press Enter twice so the passphrase is empty."; else hint="The key looks cut off or altered. Copy the whole gadar_deploy file again, including the BEGIN and END lines."; fi ;;
+              *) hint="The secret does not start with -----BEGIN OPENSSH PRIVATE KEY-----. Paste the whole gadar_deploy file." ;;
+            esac
+            echo "::error::SSH_PRIVATE_KEY is not usable. $hint"
             exit 1
           fi
           if ! ssh-keyscan -T 15 -p "$SSH_PORT" "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null || ! [ -s ~/.ssh/known_hosts ]; then
