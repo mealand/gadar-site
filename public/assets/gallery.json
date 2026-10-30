@@ -1,0 +1,219 @@
+[
+  {
+    "type": "image",
+    "src": "/assets/placeholders/wedding-01.svg",
+    "category": "wedding",
+    "caption": "Placeholder: Wedding",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/government-01.svg",
+    "category": "government",
+    "caption": "Placeholder: Government Function",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/entertainment-01.svg",
+    "category": "entertainment",
+    "caption": "Placeholder: Entertainment Show",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/catering-01.svg",
+    "category": "catering",
+    "caption": "Placeholder: Catering",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/ushering-01.svg",
+    "category": "ushering",
+    "caption": "Placeholder: Gadar Ushering",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/decor-01.svg",
+    "category": "decor",
+    "caption": "Placeholder: Decor and Design",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/wedding-02.svg",
+    "category": "wedding",
+    "caption": "Placeholder: Wedding",
+    "size": "wide"
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/government-02.svg",
+    "category": "government",
+    "caption": "Placeholder: Government Function",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/entertainment-02.svg",
+    "category": "entertainment",
+    "caption": "Placeholder: Entertainment Show",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/catering-02.svg",
+    "category": "catering",
+    "caption": "Placeholder: Catering",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/ushering-02.svg",
+    "category": "ushering",
+    "caption": "Placeholder: Gadar Ushering",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/decor-02.svg",
+    "category": "decor",
+    "caption": "Placeholder: Decor and Design",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/wedding-03.svg",
+    "category": "wedding",
+    "caption": "Placeholder: Wedding",
+    "size": "tall"
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/government-03.svg",
+    "category": "government",
+    "caption": "Placeholder: Government Function",
+    "size": "tall"
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/entertainment-03.svg",
+    "category": "entertainment",
+    "caption": "Placeholder: Entertainment Show",
+    "size": "tall"
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/catering-03.svg",
+    "category": "catering",
+    "caption": "Placeholder: Catering",
+    "size": "tall"
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/ushering-03.svg",
+    "category": "ushering",
+    "caption": "Placeholder: Gadar Ushering",
+    "size": "tall"
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/decor-03.svg",
+    "category": "decor",
+    "caption": "Placeholder: Decor and Design",
+    "size": "tall"
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/wedding-04.svg",
+    "category": "wedding",
+    "caption": "Placeholder: Wedding",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/government-04.svg",
+    "category": "government",
+    "caption": "Placeholder: Government Function",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/entertainment-04.svg",
+    "category": "entertainment",
+    "caption": "Placeholder: Entertainment Show",
+    "size": "wide"
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/catering-04.svg",
+    "category": "catering",
+    "caption": "Placeholder: Catering",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/ushering-04.svg",
+    "category": "ushering",
+    "caption": "Placeholder: Gadar Ushering",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/decor-04.svg",
+    "category": "decor",
+    "caption": "Placeholder: Decor and Design",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/wedding-05.svg",
+    "category": "wedding",
+    "caption": "Placeholder: Wedding",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/government-05.svg",
+    "category": "government",
+    "caption": "Placeholder: Government Function",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/entertainment-05.svg",
+    "category": "entertainment",
+    "caption": "Placeholder: Entertainment Show",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/wedding-06.svg",
+    "category": "wedding",
+    "caption": "Placeholder: Wedding",
+    "size": "tall"
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/entertainment-06.svg",
+    "category": "entertainment",
+    "caption": "Placeholder: Entertainment Show",
+    "size": "tall"
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/wedding-07.svg",
+    "category": "wedding",
+    "caption": "Placeholder: Wedding",
+    "size": ""
+  },
+  {
+    "type": "image",
+    "src": "/assets/placeholders/wedding-08.svg",
+    "category": "wedding",
+    "caption": "Placeholder: Wedding",
+    "size": ""
+  }
+]

@@ -1,0 +1,30 @@
+:root {
+  --onyx: #0b0b0c;
+  --onyx-2: #121214;
+  --onyx-3: #1a1a1d;
+  --line: rgba(201, 164, 92, 0.22);
+  --line-soft: rgba(244, 239, 230, 0.08);
+  --gold: #c9a45c;
+  --gold-light: #e3c88f;
+  --gold-deep: #9c7b3c;
+  --ivory: #f4efe6;
+  --ivory-dim: rgba(244, 239, 230, 0.72);
+  --muted: #8a8580;
+  --danger: #e07a6a;
+  --success: #8fc79a;
+
+  --font-display: 'Cormorant Garamond', 'Times New Roman', serif;
+  --font-body: 'Manrope', 'Helvetica Neue', Arial, sans-serif;
+
+  --fs-hero: clamp(3.2rem, 9vw, 9rem);
+  --fs-h1: clamp(2.8rem, 6.5vw, 6.2rem);
+  --fs-h2: clamp(2.2rem, 4.6vw, 4.4rem);
+  --fs-h3: clamp(1.5rem, 2.4vw, 2.2rem);
+  --fs-lead: clamp(1.05rem, 1.4vw, 1.3rem);
+
+  --gutter: clamp(1rem, 4vw, 3.5rem);
+  --section: clamp(5rem, 12vw, 10rem);
+  --radius: 2px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --header-h: 84px;
+}

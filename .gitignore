@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.DS_Store
+Thumbs.db
+*.log
+
+# Secrets and local data never go to GitHub
+public/api/lib/config.php
+database/*.sqlite
+
+# Visitor uploads live only on the server
+public/uploads/*
+!public/uploads/.htaccess

@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Book a Call | Have a Gadar Experience</title>
+  <meta name="description" content="Choose your event type, share a few details and request a call from the Gadar Events planning team." />
+  <link rel="canonical" href="https://gadarevents.com/book.html" />
+  <!-- @include head -->
+</head>
+<body data-page="book">
+  <!-- @include chrome -->
+  <!-- @include header -->
+
+  <main id="main">
+    <section class="page-hero" style="min-height: 60vh">
+      <div class="page-hero__bg"><img src="/assets/placeholders/wedding-06.svg" alt="" /></div>
+      <div class="container">
+        <p class="eyebrow" data-reveal>Book a Call</p>
+        <h1 data-split>Have a Gadar <em>Experience</em></h1>
+        <p class="lead" data-reveal>Three short steps. Tell us what you are celebrating and when to call, and a senior planner will be in touch.</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 2rem">
+      <div class="container booking">
+        <aside class="booking__aside" data-reveal>
+          <h2>Your private <em>consultation</em></h2>
+          <p>Every Gadar event begins with listening. Your call is free, unhurried and completely confidential.</p>
+          <ol class="steps-list" data-steps>
+            <li class="is-active"><span>1</span>Event Type</li>
+            <li><span>2</span>Event Details</li>
+            <li><span>3</span>Your Details</li>
+          </ol>
+          <p>Prefer to chat now? <a class="gold" href="https://wa.me/2348000000000" target="_blank" rel="noopener" data-whatsapp>Message us on WhatsApp</a></p>
+        </aside>
+
+        <form class="booking__form" data-booking novalidate>
+          <div class="booking__bar"><span></span></div>
+
+          <fieldset class="step is-active" data-step="1">
+            <legend class="step__title">What are you celebrating?</legend>
+            <p class="step__sub">Choose the occasion that fits best. You can tell us more in the next step.</p>
+            <div class="field">
+              <div class="event-types">
+                <label class="event-type" data-cursor="Select">
+                  <input type="radio" name="event_type" value="Wedding" required />
+                  <span class="event-type__inner">
+                    <img src="/assets/placeholders/wedding-07.svg" alt="" loading="lazy" />
+                    <span class="event-type__check">&#10003;</span>
+                    <strong>Wedding</strong><small>Traditional, white or both</small>
+                  </span>
+                </label>
+                <label class="event-type" data-cursor="Select">
+                  <input type="radio" name="event_type" value="Government or Corporate Function" />
+                  <span class="event-type__inner">
+                    <img src="/assets/placeholders/government-04.svg" alt="" loading="lazy" />
+                    <span class="event-type__check">&#10003;</span>
+                    <strong>Government or Corporate</strong><small>Ceremonies, summits, galas</small>
+                  </span>
+                </label>
+                <label class="event-type" data-cursor="Select">
+                  <input type="radio" name="event_type" value="Entertainment Show" />
+                  <span class="event-type__inner">
+                    <img src="/assets/placeholders/entertainment-04.svg" alt="" loading="lazy" />
+                    <span class="event-type__check">&#10003;</span>
+                    <strong>Entertainment Show</strong><small>Concerts, premieres, live shows</small>
+                  </span>
+                </label>
+                <label class="event-type" data-cursor="Select">
+                  <input type="radio" name="event_type" value="Private Celebration" />
+                  <span class="event-type__inner">
+                    <img src="/assets/placeholders/decor-01.svg" alt="" loading="lazy" />
+                    <span class="event-type__check">&#10003;</span>
+                    <strong>Private Celebration</strong><small>Birthdays, anniversaries, dinners</small>
+                  </span>
+                </label>
+                <label class="event-type" data-cursor="Select">
+                  <input type="radio" name="event_type" value="Ushering Only" />
+                  <span class="event-type__inner">
+                    <img src="/assets/placeholders/ushering-03.svg" alt="" loading="lazy" />
+                    <span class="event-type__check">&#10003;</span>
+                    <strong>Ushering Only</strong><small>Gadar Ushering for your event</small>
+                  </span>
+                </label>
+                <label class="event-type" data-cursor="Select">
+                  <input type="radio" name="event_type" value="Other" />
+                  <span class="event-type__inner">
+                    <img src="/assets/placeholders/catering-03.svg" alt="" loading="lazy" />
+                    <span class="event-type__check">&#10003;</span>
+                    <strong>Something Else</strong><small>Tell us about it</small>
+                  </span>
+                </label>
+              </div>
+              <span class="field__error"></span>
+            </div>
+            <div class="step__actions">
+              <span></span>
+              <button class="btn btn--gold magnetic" type="button" data-next><span>Continue</span></button>
+            </div>
+          </fieldset>
+
+          <fieldset class="step" data-step="2">
+            <legend class="step__title">Tell us about the occasion</legend>
+            <p class="step__sub">Approximate answers are perfect. We will refine everything together on the call.</p>
+            <div class="form-grid">
+              <div class="field">
+                <label for="b-date">Event Date</label>
+                <input id="b-date" name="event_date" type="date" />
+                <span class="field__error"></span>
+              </div>
+              <div class="field">
+                <label for="b-location">City or Venue</label>
+                <input id="b-location" name="location" type="text" placeholder="For example, Kaduna" maxlength="160" required />
+                <span class="field__error"></span>
+              </div>
+              <div class="field">
+                <label for="b-guests">Number of Guests</label>
+                <select id="b-guests" name="guests" required>
+                  <option value="">Select</option>
+                  <option>Under 100</option>
+                  <option>100 to 300</option>
+                  <option>300 to 700</option>
+                  <option>700 to 1,500</option>
+                  <option>1,500 to 5,000</option>
+                  <option>Over 5,000</option>
+                </select>
+                <span class="field__error"></span>
+              </div>
+              <div class="field">
+                <label for="b-budget">Budget Range</label>
+                <select id="b-budget" name="budget">
+                  <option value="">Prefer to discuss</option>
+                  <option>Under &#8358;5 million</option>
+                  <option>&#8358;5 million to &#8358;15 million</option>
+                  <option>&#8358;15 million to &#8358;40 million</option>
+                  <option>&#8358;40 million to &#8358;100 million</option>
+                  <option>Over &#8358;100 million</option>
+                </select>
+                <span class="field__error"></span>
+              </div>
+              <fieldset class="field span-2">
+                <legend>Services Needed</legend>
+                <div class="chips">
+                  <label class="chip"><input type="checkbox" name="services[]" value="planning" /><span>Full Planning</span></label>
+                  <label class="chip"><input type="checkbox" name="services[]" value="hosting" /><span>Hosting</span></label>
+                  <label class="chip"><input type="checkbox" name="services[]" value="catering" /><span>Catering</span></label>
+                  <label class="chip"><input type="checkbox" name="services[]" value="ushering" /><span>Ushering</span></label>
+                  <label class="chip"><input type="checkbox" name="services[]" value="decor" /><span>Decor and Design</span></label>
+                  <label class="chip"><input type="checkbox" name="services[]" value="coordination" /><span>Day of Coordination</span></label>
+                </div>
+                <span class="field__error"></span>
+              </fieldset>
+              <div class="field span-2">
+                <label for="b-notes">Anything else we should know?</label>
+                <textarea id="b-notes" name="notes" maxlength="3000" placeholder="Your vision, theme, special guests or questions"></textarea>
+                <span class="field__error"></span>
+              </div>
+            </div>
+            <div class="step__actions">
+              <button class="btn magnetic" type="button" data-prev><span>Back</span></button>
+              <button class="btn btn--gold magnetic" type="button" data-next><span>Continue</span></button>
+            </div>
+          </fieldset>
+
+          <fieldset class="step" data-step="3">
+            <legend class="step__title">Where should we call you?</legend>
+            <p class="step__sub">Your details are used only to arrange your consultation.</p>
+            <div class="form-grid">
+              <div class="field">
+                <label for="b-name">Full Name</label>
+                <input id="b-name" name="name" type="text" autocomplete="name" maxlength="120" required />
+                <span class="field__error"></span>
+              </div>
+              <div class="field">
+                <label for="b-phone">Phone or WhatsApp</label>
+                <input id="b-phone" name="phone" type="tel" autocomplete="tel" maxlength="40" placeholder="+234" required />
+                <span class="field__error"></span>
+              </div>
+              <div class="field">
+                <label for="b-email">Email</label>
+                <input id="b-email" name="email" type="email" autocomplete="email" maxlength="160" required />
+                <span class="field__error"></span>
+              </div>
+              <div class="field">
+                <label for="b-time">Best Time to Call</label>
+                <select id="b-time" name="preferred_time" required>
+                  <option value="">Select</option>
+                  <option>Morning, 9am to 12pm</option>
+                  <option>Afternoon, 12pm to 4pm</option>
+                  <option>Evening, 4pm to 7pm</option>
+                  <option>Any time</option>
+                </select>
+                <span class="field__error"></span>
+              </div>
+              <label class="check span-2"><input type="checkbox" name="whatsapp_ok" value="1" checked /> You may contact me on WhatsApp as well.</label>
+            </div>
+            <div class="hp" aria-hidden="true"><label>Leave this empty <input name="website" tabindex="-1" autocomplete="off" /></label></div>
+            <div class="step__actions">
+              <button class="btn magnetic" type="button" data-prev><span>Back</span></button>
+              <button class="btn btn--gold btn--lg magnetic" type="submit"><span>Request My Call</span></button>
+            </div>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </fieldset>
+
+          <div class="step confirm" data-step="done" tabindex="-1">
+            <svg class="confirm__mark" viewBox="0 0 90 90" fill="none" aria-hidden="true">
+              <circle cx="45" cy="45" r="43" stroke="currentColor" />
+              <path d="M28 46l11 11 23 -24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <h2>Thank you, <em data-confirm-name>friend</em></h2>
+            <p class="lead">Your request is with our planners. Expect a call within one working day. Your Gadar Experience has begun.</p>
+            <div class="confirm__actions">
+              <a class="btn btn--gold magnetic" href="https://wa.me/2348000000000" target="_blank" rel="noopener" data-confirm-whatsapp><span>Continue on WhatsApp</span></a>
+              <a class="btn magnetic" href="/gallery.html"><span>Experience Gadar</span></a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- @include footer -->
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

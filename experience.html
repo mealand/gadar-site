@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Gadar Experience | Stories From Our Clients and Guests</title>
+  <meta name="description" content="Read and share stories from Gadar Events clients and guests. Share your Gadar Experience with words, photos and video." />
+  <link rel="canonical" href="https://gadarevents.com/experience.html" />
+  <!-- @include head -->
+</head>
+<body data-page="experience">
+  <!-- @include chrome -->
+  <!-- @include header -->
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="page-hero__bg"><img src="/assets/placeholders/entertainment-05.svg" alt="" /></div>
+      <div class="container">
+        <p class="eyebrow" data-reveal>The Gadar Experience</p>
+        <h1 data-split>Told by the people who <em>lived it</em></h1>
+        <p class="lead" data-reveal>Couples, hosts, dignitaries and guests sharing what it felt like to Experience Gadar.</p>
+        <a class="btn btn--gold magnetic" href="#share" data-reveal style="margin-top: 2rem"><span>Share Your Experience</span></a>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 0">
+      <div class="container">
+        <div class="filters" role="toolbar" aria-label="Filter stories" data-reveal>
+          <button class="filter is-active" data-exp-filter="all">All Stories</button>
+          <button class="filter" data-exp-filter="client">From Clients</button>
+          <button class="filter" data-exp-filter="attendee">From Guests</button>
+        </div>
+        <div class="exp-wall" data-exp-wall aria-live="polite"></div>
+        <div class="load-more"><button class="btn magnetic" data-exp-more hidden><span>Load More Stories</span></button></div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="share">
+      <div class="container share">
+        <div class="share__intro">
+          <p class="eyebrow" data-reveal>Share Your Experience</p>
+          <h2 data-split>Tell us about your <em>Gadar Experience</em></h2>
+          <p class="lead" data-reveal>Were you our client or a guest at one of our events? We would love to hear your story and see your favourite moments.</p>
+          <ol class="share__steps">
+            <li data-reveal>Write a few words about the occasion and how it felt.</li>
+            <li data-reveal>Add up to five photos and one short video if you like.</li>
+            <li data-reveal>Our team reviews every story before it appears on the wall.</li>
+          </ol>
+        </div>
+
+        <form class="form-grid" data-exp-form novalidate>
+          <div class="field" data-reveal>
+            <label for="e-name">Your Name</label>
+            <input id="e-name" name="name" type="text" autocomplete="name" maxlength="120" required />
+            <span class="field__error"></span>
+          </div>
+          <div class="field" data-reveal>
+            <label for="e-email">Email <small style="text-transform:none;letter-spacing:0;color:var(--muted)">(never published)</small></label>
+            <input id="e-email" name="email" type="email" autocomplete="email" maxlength="160" required />
+            <span class="field__error"></span>
+          </div>
+          <fieldset class="field" data-reveal>
+            <legend>I was a</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="role" value="client" checked /><span>Client</span></label>
+              <label class="chip"><input type="radio" name="role" value="attendee" /><span>Guest</span></label>
+            </div>
+            <span class="field__error"></span>
+          </fieldset>
+          <div class="field" data-reveal>
+            <label for="e-event">Which Event?</label>
+            <input id="e-event" name="event_name" type="text" maxlength="160" placeholder="For example, Amina and Musa's wedding, Kaduna" required />
+            <span class="field__error"></span>
+          </div>
+          <div class="field span-2" data-reveal>
+            <label for="e-story">Your Story</label>
+            <textarea id="e-story" name="story" maxlength="2000" required placeholder="What made it memorable?"></textarea>
+            <span class="field__error"></span>
+          </div>
+          <div class="field span-2" data-reveal>
+            <span class="label">Photos and Video</span>
+            <div class="dropzone" data-dropzone data-cursor="Upload">
+              <input type="file" name="media[]" accept="image/jpeg,image/png,image/webp,video/mp4,video/quicktime,video/webm" multiple aria-label="Add photos or a video" />
+              <strong>Drop files here or click to browse</strong>
+              <small>Up to 5 photos (JPG, PNG or WEBP, 8 MB each) and 1 video (MP4, MOV or WEBM, 50 MB)</small>
+            </div>
+            <div class="previews" data-previews></div>
+            <span class="field__error"></span>
+          </div>
+          <label class="check span-2" data-reveal>
+            <input type="checkbox" name="consent" value="1" required />
+            I agree that Gadar Events may publish my story, first name and media on this website and its social pages.
+          </label>
+          <div class="hp" aria-hidden="true"><label>Leave this empty <input name="website" tabindex="-1" autocomplete="off" /></label></div>
+          <div class="span-2" data-reveal>
+            <button class="btn btn--gold btn--lg magnetic" type="submit"><span>Share My Experience</span></button>
+            <div class="progress" data-progress><span></span></div>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- @include footer -->
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>
