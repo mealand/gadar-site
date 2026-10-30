@@ -125,6 +125,30 @@ In https://github.com/mealand/gadar-site go to **Settings > Secrets and variable
 | `FTP_USERNAME` | the full FTP login, for example `github@gadarevents.com` |
 | `FTP_PASSWORD` | the FTP password |
 
+### 5b. Recommended: deploy over SSH instead of FTP
+
+FTP data connections from GitHub to shared hosting can time out ("Timeout when trying to open data connection"). SSH avoids this and is faster. Namecheap shared hosting accepts SSH on port 21098. When the SSH secrets below exist, the workflow uses SSH and ignores the FTP secrets.
+
+1. On your computer, create a key with no passphrase (PowerShell or Terminal):
+
+   ```bash
+   ssh-keygen -t ed25519 -C "github-deploy" -N "" -f gadar_deploy
+   ```
+
+   This creates two files: `gadar_deploy` (private, keep it secret) and `gadar_deploy.pub` (public).
+2. cPanel > **SSH Access** > **Manage SSH Keys** > **Import Key**. Name it `gadar_deploy`, paste the contents of `gadar_deploy.pub` into the public key box, and click **Import**. Back on the list, click **Manage** next to it and **Authorize**.
+3. If **SSH Access** is missing or switched off, ask Namecheap support to enable SSH for your hosting account.
+4. In GitHub, add these repository secrets:
+
+   | Name | Value |
+   | --- | --- |
+   | `SSH_HOST` | your server name from cPanel's sidebar (for example `server123.web-hosting.com`), or `gadarevents.com` |
+   | `SSH_USERNAME` | your cPanel username |
+   | `SSH_PRIVATE_KEY` | the entire contents of the `gadar_deploy` file, including the BEGIN and END lines |
+   | `SSH_PORT` | optional, defaults to `21098` |
+
+5. Delete the two key files from your computer once the secrets are saved, or store the private one somewhere safe.
+
 ### 6. Run the first deployment
 
 Push to `main`, or open the **Actions** tab, pick **Build and deploy to cPanel** and click **Run workflow**. The first upload takes a few minutes; later ones only send changed files.
@@ -153,4 +177,6 @@ A new booking, message or story also sends an email to the address set as `mail.
 
 ## How deployment works
 
-`.github/workflows/deploy.yml` runs on every push to `main`: it installs packages, runs the dash check, builds the site with Vite, and uploads `dist/` to `public_html` with FTPS. Only changed files are sent. The server config and visitor uploads are excluded so they are never replaced.
+`.github/workflows/deploy.yml` runs on every push to `main`: it installs packages, runs the dash check, builds the site with Vite, and uploads `dist/` to `public_html`. It uses SSH (rsync) when the SSH secrets are set, otherwise FTPS with up to three attempts, each resuming where the last stopped. Only changed files are sent. The server config and visitor uploads are excluded so they are never replaced.
+
+If a run fails, open the **Actions** tab, pick the run and click **Re-run jobs**.

@@ -9,15 +9,21 @@ concurrency:
   group: deploy
   cancel-in-progress: false
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      # SSH is used when its key is set (recommended on Namecheap); otherwise FTPS.
+      USE_SSH: ${{ secrets.SSH_PRIVATE_KEY != '' }}
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
@@ -28,7 +34,30 @@ jobs:
       - name: Build site (includes the dash check)
         run: npm run build
 
+      - name: Upload to Namecheap over SSH
+        if: env.USE_SSH == 'true'
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+          SSH_PORT: ${{ secrets.SSH_PORT || '21098' }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p "$SSH_PORT" "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+          # Only adds and updates files, so the server config and visitor uploads are never touched.
+          rsync -rltz --omit-dir-times --stats \
+            --exclude 'api/lib/config.php' --exclude 'uploads/experiences/' \
+            -e "ssh -i ~/.ssh/deploy_key -p $SSH_PORT" \
+            dist/ "$SSH_USERNAME@$SSH_HOST:public_html/"
+
+      # FTPS data connections on shared hosting sometimes time out, so the upload is retried.
+      # Each attempt resumes from what the server already has.
       - name: Upload to Namecheap over FTPS
+        id: ftp1
+        if: env.USE_SSH != 'true'
+        continue-on-error: true
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -36,8 +65,47 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
           port: 21
+          timeout: 120000
           local-dir: ./dist/
           # The FTP account is created with public_html as its home folder, so upload to its root.
+          server-dir: ./
+          exclude: |
+            **/.git*
+            **/.git*/**
+            api/lib/config.php
+            uploads/experiences/**
+
+      - name: Retry FTPS upload
+        id: ftp2
+        if: env.USE_SSH != 'true' && steps.ftp1.outcome == 'failure'
+        continue-on-error: true
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          timeout: 120000
+          local-dir: ./dist/
+          server-dir: ./
+          exclude: |
+            **/.git*
+            **/.git*/**
+            api/lib/config.php
+            uploads/experiences/**
+
+      - name: Final FTPS attempt
+        if: env.USE_SSH != 'true' && steps.ftp2.outcome == 'failure'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          timeout: 120000
+          local-dir: ./dist/
           server-dir: ./
           exclude: |
             **/.git*
