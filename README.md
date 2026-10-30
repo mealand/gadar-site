@@ -148,6 +148,7 @@ FTP data connections from GitHub to shared hosting can time out ("Timeout when t
    | `SSH_USERNAME` | your cPanel username |
    | `SSH_PRIVATE_KEY` | the entire contents of the `gadar_deploy` file, including the BEGIN and END lines |
    | `SSH_PORT` | optional, defaults to `21098` |
+   | `SSH_KEY_PASSPHRASE` | only if the key has a passphrase (for example a key generated inside cPanel) |
 
 5. Delete the two key files from your computer once the secrets are saved, or store the private one somewhere safe.
 

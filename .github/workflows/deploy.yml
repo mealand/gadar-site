@@ -41,6 +41,7 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
           SSH_PORT: ${{ secrets.SSH_PORT || '21098' }}
+          SSH_KEY_PASSPHRASE: ${{ secrets.SSH_KEY_PASSPHRASE }}
         run: |
           install -m 700 -d ~/.ssh
           # Keys copied on Windows can carry CRLF line endings, which ssh rejects.
@@ -52,6 +53,13 @@ jobs:
           fi
           printf '%s\n' "$key" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
+          # A key protected by a passphrase is unlocked for this run only.
+          if [ -n "$SSH_KEY_PASSPHRASE" ]; then
+            if ! ssh-keygen -p -P "$SSH_KEY_PASSPHRASE" -N '' -f ~/.ssh/deploy_key > /dev/null 2>&1; then
+              echo "::error::SSH_KEY_PASSPHRASE does not unlock SSH_PRIVATE_KEY. Check the passphrase or remove that secret."
+              exit 1
+            fi
+          fi
           if ! err=$(ssh-keygen -y -P '' -f ~/.ssh/deploy_key 2>&1 >/dev/null); then
             # Describe what was received without printing the key itself.
             first=$(head -n1 ~/.ssh/deploy_key | cut -c1-36)
@@ -59,7 +67,7 @@ jobs:
             echo "ssh-keygen says: $err"
             case "$first" in
               ssh-ed25519*|ssh-rsa*) hint="This is the PUBLIC key (gadar_deploy.pub). The secret needs the private file gadar_deploy, without .pub." ;;
-              -----BEGIN*) if printf '%s' "$err" | grep -qi passphrase; then hint="The key has a passphrase. Make a new key and press Enter twice so the passphrase is empty."; else hint="The key looks cut off or altered. Copy the whole gadar_deploy file again, including the BEGIN and END lines."; fi ;;
+              -----BEGIN*) if printf '%s' "$err" | grep -qi passphrase; then hint="The key has a passphrase. Add it as the secret SSH_KEY_PASSPHRASE, or make a new key and press Enter twice so the passphrase is empty."; else hint="The key looks cut off or altered. Copy the whole gadar_deploy file again, including the BEGIN and END lines."; fi ;;
               *) hint="The secret does not start with -----BEGIN OPENSSH PRIVATE KEY-----. Paste the whole gadar_deploy file." ;;
             esac
             echo "::error::SSH_PRIVATE_KEY is not usable. $hint"
