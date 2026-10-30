@@ -92,6 +92,9 @@ jobs:
           fi
           target="${target:-public_html}"
           echo "::notice::Uploading to $target"
+          # Report where copies of the site already live, to help find the folder the domain serves.
+          found=$($ssh_cmd "$SSH_USERNAME@$SSH_HOST" 'cd ~ && echo "home: $(ls -1 | tr "\n" " ")"; find ~ -maxdepth 4 -name 404.html -path "*" -not -path "*/node_modules/*" 2>/dev/null | sed "s#^$HOME/##" | tr "\n" " "; echo; uapi DomainInfo list_domains 2>&1 | grep -E "main_domain|addon|- " | head -8 | tr "\n" " "' || true)
+          echo "::notice::Server layout: $found"
           # Only adds and updates files, so the server config and visitor uploads are never touched.
           set +e
           rsync -rltz --omit-dir-times --stats \
