@@ -42,6 +42,8 @@ jobs:
           SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
           SSH_PORT: ${{ secrets.SSH_PORT || '21098' }}
           SSH_KEY_PASSPHRASE: ${{ secrets.SSH_KEY_PASSPHRASE }}
+          SSH_TARGET_DIR: ${{ vars.SSH_TARGET_DIR }}
+          SITE_DOMAIN: gadarevents.com
         run: |
           install -m 700 -d ~/.ssh
           # Keys copied on Windows can carry CRLF line endings, which ssh rejects.
@@ -82,18 +84,27 @@ jobs:
             echo "::error::Could not sign in over SSH as $SSH_USERNAME. Check SSH_USERNAME is your cPanel username and that the key is Authorized in cPanel > SSH Access > Manage SSH Keys."
             exit 1
           fi
+          # Upload into the folder the domain is actually served from (addon domains are not public_html).
+          target="$SSH_TARGET_DIR"
+          if [ -z "$target" ]; then
+            target=$($ssh_cmd "$SSH_USERNAME@$SSH_HOST" "uapi --output=json DomainInfo single_domain_data domain=$SITE_DOMAIN 2>/dev/null" \
+              | grep -o '"documentroot":"[^"]*"' | head -n1 | cut -d'"' -f4 | tr -d '\\\\')
+          fi
+          target="${target:-public_html}"
+          echo "::notice::Uploading to $target"
           # Only adds and updates files, so the server config and visitor uploads are never touched.
           set +e
           rsync -rltz --omit-dir-times --stats \
             --exclude 'api/lib/config.php' --exclude 'uploads/experiences/' \
             -e "$ssh_cmd" \
-            dist/ "$SSH_USERNAME@$SSH_HOST:public_html/"
+            dist/ "$SSH_USERNAME@$SSH_HOST:$target/"
           code=$?
           set -e
+          [ $code -eq 0 ] && echo "::notice::rsync upload finished"
           if [ $code -ne 0 ]; then
             # Some shared hosts restrict rsync; stream the site as one archive instead.
-            echo "rsync stopped with code $code, uploading as an archive instead."
-            tar -czf - -C dist . | $ssh_cmd "$SSH_USERNAME@$SSH_HOST" 'tar -xzf - -C public_html && echo "Archive unpacked into public_html"'
+            echo "::notice::rsync stopped with code $code, uploading as an archive instead."
+            tar -czf - -C dist . | $ssh_cmd "$SSH_USERNAME@$SSH_HOST" "tar -xzf - -C '$target' && echo 'Archive unpacked into $target'"
           fi
 
       # FTPS data connections on shared hosting sometimes time out, so the upload is retried.
